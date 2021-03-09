@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
+  searchkick
+
   belongs_to :subject, counter_cache: true
   has_many :answers, inverse_of: :question
   accepts_nested_attributes_for :answers, reject_if: :all_blank, allow_destroy: true
@@ -14,7 +16,7 @@ class Question < ApplicationRecord
     .page(page)
   }
 
-  scope :search, ->(page, term){
+  scope :_search_, ->(page, term){
     includes(:answers, :subject)
     .where("description LIKE ?", "%#{term}%")
     .page(page)

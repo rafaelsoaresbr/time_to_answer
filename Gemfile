@@ -42,6 +42,12 @@ gem 'tty-spinner'
 gem 'kaminari'
 gem 'kaminari-i18n'
 gem 'cocoon'
+gem 'prawn-rails'
+gem 'trix'
+gem 'searchkick'
+
+gem 'redis'
+gem 'hiredis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

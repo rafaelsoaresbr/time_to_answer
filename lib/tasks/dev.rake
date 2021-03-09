@@ -14,6 +14,7 @@ namespace :dev do
       show_spinner("Adding default user...") { %x(rails dev:add_default_user) }
       show_spinner("Adding default subjects...") { %x(rails dev:add_default_subjects) }
       show_spinner("Adding questions and answers...") { %x(rails dev:add_questions_and_answers) }
+      show_spinner("Adding answers to Redis...") { %x(rails dev:add_answers_to_redis) }
     else
       puts "You aren't in development environment!"
     end
@@ -78,6 +79,15 @@ namespace :dev do
     show_spinner("Reseting subject's counter") do
       Subject.all.each do |subject|
         Subject.reset_counters(subject.id, :questions)
+      end
+    end
+  end
+
+  desc "Add answers to Redis"
+  task add_answers_to_redis: :environment do
+    show_spinner("Adding answers to Redis") do
+      Answer.find_each do |answer|
+        Rails.cache.write(answer.id, "#{answer.question_id}@@#{answer.correct}")
       end
     end
   end

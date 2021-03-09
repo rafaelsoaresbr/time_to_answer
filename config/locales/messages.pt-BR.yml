@@ -1,0 +1,6 @@
+'pt-BR':
+  message:
+    listing: Listando %{model}
+    new: Novo %{model}
+    editing: Editando %{model}
+    confirm: Você deseja realmente excluir [%{item}]
